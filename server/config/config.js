@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'dev') {
     urlBD = 'mongodb://localhost:27017/cafe';
 } else {
     // BD remota en MongoDB Atlas
-    urlBD = 'mongodb+srv://wkadmin:rH38PxpenccNZr5r@cluster0-apwgs.mongodb.net/cafe';
+    urlBD = process.env.MONGO_URI;
 }
 
 process.env.urlBD = urlBD;
