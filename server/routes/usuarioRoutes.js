@@ -8,7 +8,9 @@ const bcrypt = require('bcrypt');
 //los campos que se van a permitir actualizar en el put
 const _ = require('underscore');
 
-app.get('/usuario', function(req, res) {
+const { verificaToken, verificaRole } = require('../middleware/autorizacion');
+
+app.get('/usuario', verificaToken, (req, res) => {
     /**
      * Regresa todos los registros si find no se encuentra filtrado por ningún criterio,
      * pero al colocarle los parámetros de 'desde' y 'limite' se puede controlar el 
@@ -53,7 +55,8 @@ app.get('/usuario', function(req, res) {
 
 });
 
-app.post('/usuario', function(req, res) {
+//CREAR USUARIO
+app.post('/usuario', [verificaToken, verificaRole], (req, res) => {
 
     let body = req.body;
     console.log(body);
@@ -82,7 +85,8 @@ app.post('/usuario', function(req, res) {
     })
 });
 
-app.put('/usuario/:id', function(req, res) {
+//ACTUALIZAR USUARIO
+app.put('/usuario/:id', [verificaToken, verificaRole], (req, res) => {
 
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'mail', 'img', 'role', 'estado']);
@@ -116,7 +120,9 @@ app.put('/usuario/:id', function(req, res) {
 
 });
 
-app.delete('/usuario/:id', function(req, res) {
+
+//BORRAR USUARIO
+app.delete('/usuario/:id', [verificaToken, verificaRole], (req, res) => {
 
     let id = req.params.id;
 

@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Carga las rutas, colocar después del bodyparse
-app.use(require('./routes/usuarioRoutes'));
+app.use(require('./routes/indexRoutes'));
 
 
 app.listen(process.env.PORT, () => {
